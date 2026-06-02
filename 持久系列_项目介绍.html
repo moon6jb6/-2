@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>赤尾持久系列 — 项目介绍</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --red: #D42426;
+  --red-deep: #8B1A1A;
+  --red-soft: #E86060;
+  --gold: #C9A84C;
+  --gold-light: #E8D59E;
+  --gold-pale: #F5EDD6;
+  --bg-base: #FFF8F0;
+  --bg-warm: #FFF3E6;
+  --bg-card: #FEFAF5;
+  --text: #2D1B1B;
+  --text-secondary: #6B5555;
+}
+
+@page { size: A4; margin: 0; }
+
+body {
+  font-family: 'Noto Sans SC', sans-serif;
+  font-size: 11pt;
+  line-height: 1.8;
+  color: var(--text);
+  background: var(--white);
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+.page {
+  width: 210mm;
+  min-height: 297mm;
+  padding: 20mm 25mm;
+  page-break-after: always;
+  position: relative;
+  overflow: hidden;
+}
+.page:last-child { page-break-after: avoid; }
+
+/* ===== COVER ===== */
+.cover {
+  background: linear-gradient(160deg, var(--bg-base) 0%, var(--bg-warm) 40%, var(--gold-pale) 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 40mm 30mm;
+}
+.cover::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(ellipse at 50% 30%, rgba(212,36,38,0.04) 0%, transparent 60%);
+  pointer-events: none;
+}
+.cover::after {
+  content: '';
+  position: absolute;
+  top: 12mm; left: 12mm; right: 12mm; bottom: 12mm;
+  border: 1px solid rgba(201,168,76,0.25);
+  pointer-events: none;
+}
+.cover-badge {
+  display: inline-block;
+  padding: 4px 18px;
+  border: 1px solid var(--red);
+  border-radius: 20px;
+  font-size: 9pt;
+  letter-spacing: 2px;
+  color: var(--red);
+  margin-bottom: 16px;
+  position: relative;
+  z-index: 1;
+}
+.cover-brand {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 12pt;
+  color: var(--text-secondary);
+  letter-spacing: 6px;
+  margin-bottom: 10px;
+  position: relative;
+  z-index: 1;
+}
+.cover-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 30pt;
+  font-weight: 900;
+  color: var(--red);
+  margin-bottom: 8px;
+  position: relative;
+  z-index: 1;
+}
+.cover-subtitle {
+  font-family: 'Ma Shan Zheng', cursive;
+  font-size: 18pt;
+  color: var(--gold);
+  margin-bottom: 30px;
+  position: relative;
+  z-index: 1;
+}
+.cover-slogan {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 11pt;
+  color: var(--text-secondary);
+  letter-spacing: 3px;
+  margin-bottom: 40px;
+  position: relative;
+  z-index: 1;
+}
+.cover-divider {
+  width: 80px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--red), transparent);
+  margin: 0 auto 30px;
+  position: relative;
+  z-index: 1;
+}
+.cover-seal {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 70px; height: 70px;
+  border: 2px solid var(--red);
+  border-radius: 50%;
+  font-family: 'Noto Serif SC', serif;
+  font-size: 10pt;
+  font-weight: 900;
+  color: var(--red);
+  margin-bottom: 30px;
+  position: relative;
+  z-index: 1;
+}
+.cover-seal::before {
+  content: '';
+  position: absolute;
+  inset: -5px;
+  border: 1px solid rgba(212,36,38,0.3);
+  border-radius: 50%;
+}
+.cover-info {
+  font-size: 9.5pt;
+  color: var(--text-secondary);
+  line-height: 2;
+  position: relative;
+  z-index: 1;
+}
+.cover-info strong { color: var(--red); font-weight: 600; }
+
+/* ===== CONTENT ===== */
+.content-page {
+  background: var(--white);
+  padding: 18mm 22mm 20mm;
+}
+.content-page::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--red), var(--gold), var(--red));
+}
+
+h1 {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 20pt;
+  font-weight: 900;
+  color: var(--red);
+  margin-bottom: 6mm;
+  padding-bottom: 3mm;
+  border-bottom: 2px solid var(--gold);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+h1 .num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px; height: 32px;
+  background: var(--red);
+  color: var(--white);
+  border-radius: 50%;
+  font-size: 12pt;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+h2 {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 13pt;
+  font-weight: 700;
+  color: var(--red-deep);
+  margin: 6mm 0 3mm;
+  padding-left: 12px;
+  border-left: 3px solid var(--red);
+}
+
+p { margin-bottom: 3mm; text-align: justify; }
+em { color: var(--red); font-style: normal; font-weight: 600; }
+
+ul, ol { margin: 2mm 0 4mm 5mm; }
+li { margin-bottom: 1.5mm; }
+li strong { color: var(--red-deep); }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 4mm 0 6mm;
+  font-size: 10pt;
+}
+th {
+  background: var(--red);
+  color: var(--white);
+  padding: 8px 12px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 9.5pt;
+}
+td {
+  padding: 7px 12px;
+  border-bottom: 1px solid #f0e8dd;
+}
+tr:nth-child(even) td { background: rgba(253,246,238,0.5); }
+tr:last-child td { border-bottom: 2px solid var(--gold); }
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 4mm;
+  margin: 4mm 0 6mm;
+}
+.card-grid-3 { grid-template-columns: repeat(3, 1fr); }
+.card {
+  background: var(--bg-card);
+  border-radius: 6px;
+  padding: 4mm;
+  border-left: 3px solid var(--red);
+}
+.card-title {
+  font-weight: 700;
+  color: var(--red-deep);
+  font-size: 10.5pt;
+  margin-bottom: 2mm;
+}
+.card p { font-size: 9.5pt; color: var(--text-secondary); margin: 0; }
+
+.flow {
+  display: flex;
+  flex-direction: column;
+  gap: 2mm;
+  margin: 4mm 0 6mm;
+}
+.flow-step {
+  display: flex;
+  align-items: center;
+  gap: 3mm;
+  background: var(--bg-card);
+  padding: 3mm 4mm;
+  border-radius: 4px;
+  font-size: 10pt;
+}
+.flow-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px; height: 24px;
+  background: var(--red);
+  color: var(--white);
+  border-radius: 50%;
+  font-size: 9pt;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.flow-label { font-weight: 600; color: var(--red-deep); }
+.flow-desc { color: var(--text-secondary); font-size: 9.5pt; }
+
+.highlight-box {
+  background: linear-gradient(135deg, rgba(212,36,38,0.03), var(--gold-pale));
+  border: 1px solid rgba(201,168,76,0.2);
+  border-radius: 6px;
+  padding: 4mm 5mm;
+  margin: 4mm 0;
+}
+
+.summary-box {
+  background: linear-gradient(135deg, var(--red), var(--red-deep));
+  color: var(--white);
+  border-radius: 8px;
+  padding: 5mm 6mm;
+  margin: 6mm 0;
+}
+.summary-box h3 { color: var(--gold-light); margin-top: 0; }
+.summary-box p { color: rgba(255,255,255,0.9); font-size: 10pt; }
+
+.page-footer {
+  position: absolute;
+  bottom: 10mm;
+  left: 22mm;
+  right: 22mm;
+  display: flex;
+  justify-content: space-between;
+  font-size: 8pt;
+  color: #bbb;
+  border-top: 1px solid #eee;
+  padding-top: 2mm;
+}
+
+/* ===== NMPA SEAL ===== */
+.nmpa-seal {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px; height: 48px;
+  border: 2px solid var(--red);
+  border-radius: 50%;
+  font-family: 'Noto Serif SC', serif;
+  font-size: 16pt;
+  font-weight: 900;
+  color: var(--red);
+  margin: 2mm;
+  position: relative;
+}
+.nmpa-seal::before {
+  content: 'NMPA';
+  position: absolute;
+  bottom: -14px;
+  font-size: 6pt;
+  letter-spacing: 1px;
+  font-weight: 700;
+}
+</style>
+</head>
+<body>
+
+<!-- ==================== COVER ==================== -->
+<div class="page cover">
+  <div class="cover-badge">第18届全国大学生广告艺术大赛 · UI类参赛作品</div>
+  <div class="cover-brand">朗圣药业 · 赤尾 CHIWEI</div>
+  <h1 class="cover-title">赤尾持久系列</h1>
+  <div class="cover-subtitle">电商详情页设计说明</div>
+  <div class="cover-divider"></div>
+  <div class="cover-seal">III</div>
+  <div class="cover-slogan">爱，值得更长时间沉淀</div>
+  <div class="cover-info">
+    <strong>广告主题</strong>　赤尾红科技，让爱在探索中增进<br>
+    <strong>设计</strong>　Moon6JB<br>
+    <strong>工具</strong>　Claude Code · 设计审核Agent · 视觉分析Agent<br>
+    <strong>日期</strong>　2026年5月
+  </div>
+</div>
+
+<!-- ==================== PAGE 2: 设计概述 ==================== -->
+<div class="page content-page">
+  <h1><span class="num">1</span>设计概述</h1>
+
+  <h2>设计背景</h2>
+  <p>赤尾经典持久套历经<em>7年研发</em>，2025年获NMPA国家药监局批准，成为国内首个且唯一拥有三类医疗器械注册证的持久功能避孕套。这不是简单的功能升级，而是填补了国产防早泄技术的空白。设计要让这份沉淀被看见、被感知。</p>
+  <p>七年研发换来一张NMPA三类医疗器械注册证，赤尾持久系列在时间的淬炼中拿到了中国避孕套行业最严苛的通行证。这不是速度的胜利，是耐心的回报。</p>
+
+  <h2>目标受众</h2>
+  <ul>
+    <li>注重亲密关系品质的稳定伴侣，关注产品的安全性与可靠性</li>
+    <li>追求生活质感的都市中产阶层，愿意为安心品质消费</li>
+    <li>对NMPA认证等专业资质有认知的理性消费者</li>
+    <li>偏好持久体验而非追求新鲜刺激的成熟用户群体</li>
+    <li>在电商购买前仔细研究参数与认证信息的研究型买家</li>
+  </ul>
+
+  <h2>设计理念</h2>
+  <div class="highlight-box">
+    <p><strong>暖色调编辑风，奶白/金/红三色交织。</strong>温暖而不炽热，克制而不冷淡。NMPA三类医疗器械认证作为核心信任锚点贯穿始终。每一屏都在讲述同一个故事：科学，让亲密更从容。像翻阅一本精装画册般克制从容——没有喧哗式的视觉轰炸，只有编辑式的细腻叙事。</p>
+  </div>
+
+  <h2>色彩与字体系统</h2>
+  <table>
+    <thead><tr><th>类型</th><th>选择</th><th>说明</th></tr></thead>
+    <tbody>
+      <tr><td>主色</td><td><strong style="color:#D42426">#D42426 赤尾红</strong></td><td>品牌色，贯穿全页</td></tr>
+      <tr><td>强调色</td><td><strong style="color:#C9A84C">#C9A84C 金色</strong></td><td>装饰线、数据高亮</td></tr>
+      <tr><td>背景色</td><td>#FFF8F0 暖白</td><td>温暖氛围基底</td></tr>
+      <tr><td>标题字体</td><td>Noto Serif SC</td><td>历史厚重感</td></tr>
+      <tr><td>装饰字体</td><td>Ma Shan Zheng</td><td>书法手写感</td></tr>
+      <tr><td>正文字体</td><td>Noto Sans SC</td><td>清晰易读</td></tr>
+    </tbody>
+  </table>
+
+  <div class="page-footer">
+    <span>赤尾持久系列 · 设计说明</span>
+    <span>2</span>
+  </div>
+</div>
+
+<!-- ==================== PAGE 3: 模块详解(1) ==================== -->
+<div class="page content-page">
+  <h1><span class="num">2</span>模块详解</h1>
+
+  <h2>Hero区域 —— 爱，值得更长时间沉淀</h2>
+  <p>暖色铺陈，爱意缓缓流淌。奶白与金色交织中，产品优雅呈现。左上角「国内首个含药持久三类医疗器械注册证」标注建立权威认知。右侧产品图叠加NMPA认证标识，底部研发团队引言增添情感温度。画面本身就让人安心。</p>
+
+  <h2>品牌故事 —— 科学，让亲密更从容</h2>
+  <p>好品牌，需要时间讲述。超过<em>60%年轻男性</em>存在时间焦虑——这是赤尾研发的起点。四步研发历程清晰呈现：</p>
+  <div class="flow">
+    <div class="flow-step"><span class="flow-num">1</span><span class="flow-label">问题发现</span><span class="flow-desc">—— 60%年轻男性存在时间焦虑</span></div>
+    <div class="flow-step"><span class="flow-num">2</span><span class="flow-label">科学研发</span><span class="flow-desc">—— 7年持续攻关，制药级标准</span></div>
+    <div class="flow-step"><span class="flow-num">3</span><span class="flow-label">权威认证</span><span class="flow-desc">—— NMPA三类医疗器械注册证</span></div>
+    <div class="flow-step"><span class="flow-num">4</span><span class="flow-label">让爱从容</span><span class="flow-desc">—— 不赶时间的人，才配拥有最好的时间</span></div>
+  </div>
+
+  <h2>NMPA 三类医疗器械认证</h2>
+  <div class="highlight-box">
+    <p><strong>三类医疗器械</strong>是国家医疗器械监管的最高等级，代表最严格的安全性审核。<em>7年研发历程</em>、<em>2025年获批</em>、<em>国内首个认证</em>——三大数据锚点构建无可辩驳的权威性。安心，有据可依。</p>
+  </div>
+
+  <h2>Trust Strip — 五大信任徽章</h2>
+  <div class="card-grid card-grid-3">
+    <div class="card">
+      <div class="card-title">NMPA III类</div>
+      <p>国家药监局最高等级认证</p>
+    </div>
+    <div class="card">
+      <div class="card-title">7年研发</div>
+      <p>持续攻关，制药级标准</p>
+    </div>
+    <div class="card">
+      <div class="card-title">15项专利</div>
+      <p>国家发明专利授权</p>
+    </div>
+    <div class="card">
+      <div class="card-title">GMP标准</div>
+      <p>药品级生产质量管理</p>
+    </div>
+    <div class="card">
+      <div class="card-title">97%推荐</div>
+      <p>用户推荐率</p>
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <span>赤尾持久系列 · 设计说明</span>
+    <span>3</span>
+  </div>
+</div>
+
+<!-- ==================== PAGE 4: 模块详解(2) ==================== -->
+<div class="page content-page">
+  <h2>产品特性 —— 为什么选择赤尾经典持久</h2>
+  <p>持久，不只是时间的延长。六大特性构建完整的产品价值体系：</p>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-title">科学温和配方</div>
+      <p>确保效果的同时最大限度降低刺激，不牺牲愉悦</p>
+    </div>
+    <div class="card">
+      <div class="card-title">三类医疗器械标准</div>
+      <p>国家最高等级安全认证，为安全性背书</p>
+    </div>
+    <div class="card">
+      <div class="card-title">制药级品控</div>
+      <p>依托朗圣23年药品研发经验，GMP标准生产</p>
+    </div>
+    <div class="card">
+      <div class="card-title">情感体验优先</div>
+      <p>不以牺牲愉悦为代价，科学与温度并存</p>
+    </div>
+    <div class="card">
+      <div class="card-title">双重安全保障</div>
+      <p>物理防护+药效辅助，双重安心</p>
+    </div>
+    <div class="card">
+      <div class="card-title">97%用户推荐</div>
+      <p>真实用户口碑，最好的证言</p>
+    </div>
+  </div>
+
+  <h2>产品展示 —— 赤尾经典持久套</h2>
+  <p>镜头之下，每处细节都值得凝视。左侧4:3大图展示区，右侧两枚缩略图切换不同角度。淡入动画配合弹性缩放，浏览体验如丝般顺滑。</p>
+
+  <h2>品牌价值观 —— 红科技 · 让爱更贴近</h2>
+  <p>赤尾红全幅背景，噪声纹理叠加，视觉冲击力十足。三大价值观并排陈列：</p>
+  <div class="card-grid card-grid-3">
+    <div class="card" style="background:rgba(212,36,38,0.05)">
+      <div class="card-title">中国自研 · 国货底气</div>
+      <p>打破进口垄断，以自主知识产权展现中国智造</p>
+    </div>
+    <div class="card" style="background:rgba(212,36,38,0.05)">
+      <div class="card-title">科技温度 · 情感链接</div>
+      <p>以科学手段化解焦虑，让亲密关系更轻松</p>
+    </div>
+    <div class="card" style="background:rgba(212,36,38,0.05)">
+      <div class="card-title">健康守护 · 社会责任</div>
+      <p>守护国民生育健康，助力防控艾滋病</p>
+    </div>
+  </div>
+
+  <h2>FAQ + 用户评价</h2>
+  <p>FAQ覆盖四大核心疑问：产品区别、认证含义、安全性、购买渠道。三条评价来自不同类型的用户——复购者、首购者、医疗从业者——全方位建立社会认同。</p>
+
+  <div class="page-footer">
+    <span>赤尾持久系列 · 设计说明</span>
+    <span>4</span>
+  </div>
+</div>
+
+<!-- ==================== PAGE 5: 模块详解(3) ==================== -->
+<div class="page content-page">
+  <h2>转化模块</h2>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-title">天猫 + 京东双渠道</div>
+      <p>覆盖主流电商平台，一键直达旗舰店。转化路径短而清晰。</p>
+    </div>
+    <div class="card">
+      <div class="card-title">三级优惠券体系</div>
+      <p>新人¥10、热卖¥30、限量¥50——利用锚定效应促进消费决策</p>
+    </div>
+  </div>
+
+  <h2>产品参数</h2>
+  <p>含药持久功能、三类医疗器械注册证号、药品GMP生产标准——每条参数都在强化同一个信息：这是有证的、靠谱的、专业的。</p>
+
+  <h2>政策支持</h2>
+  <div class="highlight-box">
+    <ul>
+      <li><strong>《健康中国2030规划纲要》</strong>——普及健康生活，优化健康服务</li>
+      <li><strong>《中国遏制与防治艾滋病行动计划（2024-2030年）》</strong>——推广安全套使用</li>
+      <li><strong>《医疗器械监督管理条例》</strong>——三类医疗器械最严格监管</li>
+    </ul>
+  </div>
+
+  <h1 style="margin-top:10mm"><span class="num">3</span>交互逻辑</h1>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-title">滚动渐入动画</div>
+      <p>IntersectionObserver监听，透明度+位移动画逐项触发，延迟递增产生错落节奏</p>
+    </div>
+    <div class="card">
+      <div class="card-title">固定购买栏</div>
+      <p>底部固定，产品名称、价格、购买按钮始终可见，转化入口永不丢失</p>
+    </div>
+    <div class="card">
+      <div class="card-title">缩略图切换</div>
+      <p>弹性缩放过渡（cubic-bezier弹性曲线），手感跟手且流畅</p>
+    </div>
+    <div class="card">
+      <div class="card-title">主图缩放</div>
+      <p>点击主图可在1×和1.3×之间切换，细节一览无余</p>
+    </div>
+    <div class="card">
+      <div class="card-title">社交证明轮播</div>
+      <p>实时购买动态轮播，每隔6秒弹出新消息，从众心理自然触发</p>
+    </div>
+    <div class="card">
+      <div class="card-title">FAQ手风琴</div>
+      <p>点击展开答案，再点击收回，信息密度自主可控</p>
+    </div>
+    <div class="card">
+      <div class="card-title">响应式适配</div>
+      <p>桌面1200px多列，移动端768px断点切换单列，触屏友好</p>
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <span>赤尾持久系列 · 设计说明</span>
+    <span>5</span>
+  </div>
+</div>
+
+<!-- ==================== PAGE 6: AI辅助 + 总结 ==================== -->
+<div class="page content-page">
+  <h1><span class="num">4</span>AI辅助工具与素材来源</h1>
+
+  <h2>AI辅助工具</h2>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-title">Claude Code</div>
+      <p>前端开发、UI设计、代码审核与优化</p>
+    </div>
+    <div class="card">
+      <div class="card-title">设计审核Agent</div>
+      <p>页面布局与视觉一致性审核</p>
+    </div>
+    <div class="card">
+      <div class="card-title">视觉分析Agent</div>
+      <p>截图视觉问题检测</p>
+    </div>
+    <div class="card">
+      <div class="card-title">代码审核Agent</div>
+      <p>CSS Grid布局与交互逻辑审查</p>
+    </div>
+  </div>
+
+  <h2>素材来源</h2>
+  <ul>
+    <li>赤尾品牌命题素材包（产品图、LOGO、IP形象）</li>
+    <li>大广赛官方命题文档</li>
+    <li>朗圣药业官网</li>
+  </ul>
+
+  <h2>技术栈</h2>
+  <table>
+    <thead><tr><th>类别</th><th>技术</th></tr></thead>
+    <tbody>
+      <tr><td>核心框架</td><td>纯原生 HTML5 + CSS3 + JavaScript</td></tr>
+      <tr><td>字体</td><td>Google Fonts：Noto Serif SC + Noto Sans SC + Ma Shan Zheng</td></tr>
+      <tr><td>滚动监听</td><td>IntersectionObserver API</td></tr>
+      <tr><td>响应式</td><td>CSS Grid + Flexbox，768px断点</td></tr>
+    </tbody>
+  </table>
+
+  <div class="summary-box">
+    <h3>设计核心</h3>
+    <p>持久，从来不是单纯的拖延。它是两颗心在同频共振中，愿意把每一秒都拉长成值得回味的温暖篇章。赤尾红科技，让爱在探索中增进。不赶时间的人，才配拥有最好的时间——持久系列的亲密哲学，藏在每一个从容的节奏里。七年的等待，就为这一次的值得。</p>
+  </div>
+
+  <h2>在线预览</h2>
+  <div class="highlight-box">
+    <p style="text-align:center;font-size:12pt;margin:2mm 0">
+      <strong>GitHub Pages</strong><br>
+      <span style="color:var(--red);font-weight:600">https://moon6jb6.github.io/-2/</span>
+    </p>
+  </div>
+
+  <div style="text-align:center;margin-top:12mm">
+    <div class="cover-divider" style="margin:0 auto 8mm"></div>
+    <p style="font-family:'Ma Shan Zheng',cursive;color:var(--gold);font-size:14pt">—— 爱，值得更长时间沉淀 ——</p>
+  </div>
+
+  <div class="page-footer">
+    <span>赤尾持久系列 · 设计说明</span>
+    <span>6</span>
+  </div>
+</div>
+
+</body>
+</html>
