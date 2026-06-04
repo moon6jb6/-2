@@ -889,6 +889,82 @@ body::after{
   </div>
 </section>
 
+<!-- ===== 3D INTERACTIVE MODULE ===== -->
+<section style="padding:80px 5%;background:#1a0505;position:relative;overflow:hidden">
+  <div style="max-width:1200px;margin:0 auto;text-align:center">
+    <p style="font-size:.7rem;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:12px">INTERACTIVE 3D</p>
+    <h2 style="font-family:'Noto Serif SC',serif;font-size:clamp(1.6rem,2.5vw,2.4rem);font-weight:700;color:#fff;margin-bottom:8px">3D 包装互动展示</h2>
+    <p style="font-size:.9rem;color:rgba(255,255,255,.55);margin-bottom:32px">拖拽旋转 · 红科技粒子场</p>
+    <div id="cj3d" style="width:100%;max-width:700px;height:450px;margin:0 auto;border-radius:16px;overflow:hidden;background:#1a0505;box-shadow:0 20px 60px rgba(0,0,0,0.5)"></div>
+    <p style="margin-top:16px;font-size:13px;color:#666;animation:pulse3d 2s ease-in-out infinite">拖拽旋转 · 滚轮缩放</p>
+  </div>
+</section>
+<style>@keyframes pulse3d{0%,100%{opacity:.4}50%{opacity:1}}</style>
+<script>
+(function(){
+  function init(){
+    var el=document.getElementById('cj3d');
+    if(!el||typeof THREE==='undefined')return;
+    if(el.querySelector('canvas'))return;
+    var w=el.clientWidth||700,h=el.clientHeight||450;
+    var scene=new THREE.Scene();
+    var cam=new THREE.PerspectiveCamera(45,w/h,0.1,1000);
+    var ren=new THREE.WebGLRenderer({antialias:true,preserveDrawingBuffer:true});ren.setSize(w,h);ren.setPixelRatio(Math.min(window.devicePixelRatio,2));
+    el.appendChild(ren.domElement);
+    var ctrl=new THREE.OrbitControls(cam,ren.domElement);ctrl.enableDamping=true;ctrl.enablePan=false;
+    scene.add(new THREE.AmbientLight(0xffffff,0.5));
+    var dl=new THREE.DirectionalLight(0xffffff,1.5);dl.position.set(3,5,3);scene.add(dl);
+    
+  var rl=new THREE.PointLight(0xd42426,2,10);rl.position.set(2,2,1);scene.add(rl);
+  var gl2=new THREE.PointLight(0xc9a84c,1.5,10);gl2.position.set(-2,1,2);scene.add(gl2);
+  var grp=new THREE.Group();
+  grp.add(new THREE.Mesh(new THREE.CylinderGeometry(0.6,0.65,2.0,32),new THREE.MeshStandardMaterial({color:0xfff8f0,metalness:0.05,roughness:0.4})));
+  var ring1=new THREE.Mesh(new THREE.CylinderGeometry(0.62,0.67,0.12,32),new THREE.MeshStandardMaterial({color:0xc9a84c,metalness:0.8,roughness:0.2}));ring1.position.y=0.4;grp.add(ring1);
+  var ring2=ring1.clone();ring2.position.y=-0.4;grp.add(ring2);
+  var cap=new THREE.Mesh(new THREE.CylinderGeometry(0.55,0.6,0.4,32),new THREE.MeshStandardMaterial({color:0xd42426,metalness:0.3,roughness:0.3}));cap.position.y=1.2;grp.add(cap);
+  grp.rotation.z=-0.1;scene.add(grp);
+  var lc=document.createElement('canvas');lc.width=512;lc.height=128;var lx=lc.getContext('2d');
+  lx.fillStyle='#fff8f0';lx.fillRect(0,0,512,128);lx.fillStyle='#D42426';lx.font='bold 32px sans-serif';lx.textAlign='center';lx.fillText('赤尾 持久系列',256,45);
+  lx.fillStyle='#C9A84C';lx.font='18px sans-serif';lx.fillText('爱，值得更长时间沉淀',256,85);
+  var lbl=new THREE.Mesh(new THREE.PlaneGeometry(1.0,0.25),new THREE.MeshStandardMaterial({map:new THREE.CanvasTexture(lc),transparent:true}));
+  lbl.position.set(0,0,0.66);grp.add(lbl);
+  var pg2=new THREE.BufferGeometry(),pp2=new Float32Array(500*3);for(var j=0;j<1500;j++)pp2[j]=(Math.random()-0.5)*10;
+  pg2.setAttribute('position',new THREE.BufferAttribute(pp2,3));
+  var pts2=new THREE.Points(pg2,new THREE.PointsMaterial({color:0xd42426,size:0.02,transparent:true,opacity:0.7,sizeAttenuation:true}));scene.add(pts2);
+  var gnd2=new THREE.Mesh(new THREE.CircleGeometry(4,64),new THREE.MeshStandardMaterial({color:0x080505,metalness:0.8,roughness:0.3}));
+  gnd2.rotation.x=-Math.PI/2;gnd2.position.y=-1.5;scene.add(gnd2);
+  cam.position.set(0,1,4);
+  function animate(){requestAnimationFrame(animate);grp.rotation.y+=0.004;pts2.rotation.y-=0.0003;rl.position.x=Math.sin(Date.now()*0.001)*3;rl.position.z=Math.cos(Date.now()*0.001)*3;ctrl.update();ren.render(scene,cam);}
+  animate();
+
+  }
+  if(typeof THREE!=='undefined'){init();return;}
+  var s=document.createElement('script');s.src='../lib/three.min.js';
+  s.onload=function(){
+    var s2=document.createElement('script');s2.src='../lib/OrbitControls.js';
+    s2.onload=init;document.head.appendChild(s2);
+  };
+  document.head.appendChild(s);
+})();
+</script>
+<!-- ===== END 3D MODULE ===== -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <!-- ===== POLICY SUPPORT ===== -->
 <section style="padding:var(--pad);background:linear-gradient(180deg,var(--bg-warm),var(--bg-base));position:relative;overflow:hidden;" aria-labelledby="policy-title">
   <!-- Decorative background -->
@@ -1309,5 +1385,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
 
 console.log('赤尾 · 持久系列详情页 — 升级版 loaded ✓')
 </script>
+
+
 </body>
 </html>
