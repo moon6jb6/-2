@@ -358,37 +358,40 @@ body::after{
 /* ============================================
    PRODUCT SHOWCASE
    ============================================ */
-.product-section{padding:var(--pad);background:linear-gradient(180deg,var(--bg-base),var(--bg-warm),var(--bg-base))}
+.product-section{padding:var(--pad);background:linear-gradient(180deg,var(--bg-base),var(--bg-warm),var(--bg-base));overflow:hidden}
 .product-gallery-grid{
-  display:grid;grid-template-columns:2fr 1fr;gap:var(--s6);
-  max-width:var(--w);margin:0 auto;
+  display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:var(--s6);
+  max-width:var(--w);margin:0 auto;width:100%;
 }
 .product-main{
   background:linear-gradient(160deg,var(--gold-pale),var(--bg-warm));
   border-radius:var(--radius);
   display:flex;align-items:center;justify-content:center;
+  padding:var(--s10);
   aspect-ratio:4/3;
   cursor:zoom-in;
   transition:all .4s;
-  position:relative;overflow:hidden;
+  overflow:hidden;
+  min-width:0;
 }
 .product-main:hover{box-shadow:var(--shadow-red)}
-.product-main img{max-width:70%;max-height:70%;object-fit:contain;transition:transform .6s var(--ease)}
+.product-main img{max-width:65%;max-height:65%;object-fit:contain;transition:transform .6s var(--ease)}
 .product-main:hover img{transform:scale(1.12)}
 .product-thumbs{
   display:grid;grid-template-rows:1fr 1fr;gap:var(--s3);
+  min-width:0;
 }
 .product-thumb{
   background:var(--bg-card);border:1px solid var(--border-light);
   border-radius:var(--radius-sm);
   display:flex;align-items:center;justify-content:center;
-  padding:var(--s4);cursor:pointer;aspect-ratio:1;
+  padding:var(--s4);cursor:pointer;
   transition:all .3s;
 }
 .product-thumb:hover,.product-thumb.active{
   border-color:var(--red);background:rgba(212,36,38,.04);
 }
-.product-thumb img{max-width:80%;max-height:80%;object-fit:contain}
+.product-thumb img{max-width:75%;max-height:75%;object-fit:contain}
 
 /* ============================================
    BRAND VALUES — RED BANNER
@@ -405,7 +408,6 @@ body::after{
   pointer-events:none;
 }
 .values-content{position:relative;z-index:2;max-width:700px;margin:0 auto;text-align:center}
-.values-bg-img{position:absolute;right:5%;bottom:10%;width:200px;height:auto;opacity:.08;pointer-events:none;z-index:1;filter:grayscale(.3)}
 .values-content h2{color:#fff}
 .values-content .section-desc{color:rgba(255,255,255,.7);font-size:.95rem;line-height:2}
 .values-grid{
@@ -506,6 +508,14 @@ body::after{
 .footer-links a{color:var(--text-muted);text-decoration:none;font-size:.78rem;transition:color .3s}
 .footer-links a:hover{color:var(--red)}
 .footer-copy{font-size:.7rem;color:var(--text-muted)}
+
+/* ===== WORKS INFO ===== */
+.works-info{padding:var(--pad);background:var(--bg-base);border-top:1px solid var(--border-light)}
+.works-info-grid{max-width:var(--w);margin:0 auto;display:grid;grid-template-columns:repeat(2,1fr);gap:var(--s6)}
+.works-info-card{padding:var(--s6) var(--s8);background:var(--bg-white);border:1px solid var(--border-light);border-radius:var(--radius)}
+.works-info-card h3{font-size:.72rem;font-weight:700;letter-spacing:2px;color:var(--red);margin-bottom:var(--s3);text-transform:uppercase}
+.works-info-card p{font-size:.85rem;color:var(--text-soft);line-height:1.8}
+@media(max-width:768px){.works-info-grid{grid-template-columns:1fr}}
 
 /* ===== READING PROGRESS BAR ===== */
 .progress-bar{
@@ -649,9 +659,29 @@ body::after{
   .hero-quote-text{font-size:1rem}
   .store-jump-grid{grid-template-columns:1fr}
   .coupon-grid{grid-template-columns:1fr}
-  [style*="grid-template-columns:repeat(3,1fr)"]{grid-template-columns:1fr !important}
 }
 
+/* ===== 3D INTERACTIVE MODULE STYLES ===== */
+.nav-3d{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;justify-content:center;gap:2rem;padding:1rem 2rem;background:linear-gradient(180deg,rgba(26,10,10,0.95) 0%,rgba(26,10,10,0) 100%);pointer-events:none}
+.nav-3d a{pointer-events:all;color:var(--bg-base,#FFF8F0);text-decoration:none;font-size:.85rem;letter-spacing:.15em;opacity:.6;transition:all .3s;font-family:var(--font-body,'Noto Sans SC',sans-serif);font-weight:300}
+.nav-3d a:hover,.nav-3d a.active{opacity:1;color:var(--gold,#C9A84C)}
+.sec-3d{position:relative;width:100%;min-height:100vh;display:flex;flex-direction:column;align-items:center;overflow:hidden}
+.sec-3d-header{position:absolute;top:5vh;left:50%;transform:translateX(-50%);text-align:center;z-index:10;pointer-events:none}
+.sec-3d-header .label{font-size:.75rem;letter-spacing:.4em;color:var(--gold,#C9A84C);text-transform:uppercase;margin-bottom:.5rem;font-weight:300}
+.sec-3d-header h2{font-family:var(--font-display,'Noto Serif SC',serif);font-size:clamp(1.8rem,4vw,3rem);font-weight:700;background:linear-gradient(135deg,var(--bg-base,#FFF8F0),var(--gold,#C9A84C));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:.5rem}
+.sec-3d-header .subtitle{font-size:clamp(.85rem,1.5vw,1rem);color:rgba(255,248,240,0.5);font-weight:300;letter-spacing:.1em}
+.canvas-3d{width:100%;height:100vh;position:relative}
+.canvas-3d canvas{display:block;width:100%!important;height:100%!important}
+.hint-3d{position:absolute;bottom:8vh;left:50%;transform:translateX(-50%);z-index:10;font-size:.8rem;color:rgba(255,248,240,0.4);letter-spacing:.2em;animation:hintPulse3d 2s ease-in-out infinite;pointer-events:none}
+@keyframes hintPulse3d{0%,100%{opacity:.4}50%{opacity:.8}}
+.info-card-3d{position:absolute;background:linear-gradient(135deg,rgba(42,21,21,0.95),rgba(26,10,10,0.95));border:1px solid rgba(201,168,76,0.3);border-radius:12px;padding:1.5rem 2rem;max-width:320px;z-index:20;pointer-events:none;opacity:0;transform:translateY(10px);transition:all .4s cubic-bezier(.16,1,.3,1);backdrop-filter:blur(20px);box-shadow:0 20px 60px rgba(0,0,0,0.5)}
+.info-card-3d.visible{opacity:1;transform:translateY(0);pointer-events:all}
+.info-card-3d .year{font-family:var(--font-display,'Noto Serif SC',serif);font-size:1.8rem;color:var(--gold,#C9A84C);font-weight:700;margin-bottom:.3rem}
+.info-card-3d .event{font-size:1rem;color:var(--bg-base,#FFF8F0);font-weight:500;margin-bottom:.5rem}
+.info-card-3d .desc{font-size:.85rem;color:rgba(255,248,240,0.6);line-height:1.6;font-weight:300}
+.stamp-text-3d{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) scale(0);z-index:30;font-family:var(--font-display,'Noto Serif SC',serif);font-size:clamp(2rem,5vw,4rem);font-weight:900;color:var(--red,#D42426);text-shadow:0 0 40px rgba(212,36,38,0.5);pointer-events:none;opacity:0;transition:all .6s cubic-bezier(.34,1.56,.64,1)}
+.stamp-text-3d.visible{transform:translate(-50%,-50%) scale(1);opacity:1}
+@media(max-width:768px){.nav-3d{gap:1rem}.nav-3d a{font-size:.7rem}.sec-3d-header{top:3vh}}
 
 </style>
 </head>
@@ -724,10 +754,9 @@ body::after{
 <!-- ===== STORY ===== -->
 <section class="story-section" id="story" aria-labelledby="story-title">
   <div class="story-grid">
-    <div class="story-visual reveal" aria-hidden="true" style="position:relative;">
-      <img src="images/ip/赤尾ip-01.jpg" alt="" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.12;">
-      <div class="story-visual-inner" style="position:relative;z-index:1;">
-        <span class="story-visual-icon"><svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></span>
+    <div class="story-visual reveal" aria-hidden="true">
+      <div class="story-visual-inner">
+        <span class="story-visual-icon">💞</span>
         <div class="story-visual-title">爱不是竞赛<br>是一起走好每一步</div>
         <p class="story-visual-sub">赤尾经典持久套 — 从容相爱，不赶时间</p>
       </div>
@@ -802,32 +831,32 @@ body::after{
   </div>
   <div class="features-grid">
     <div class="f-card reveal d1">
-      <div class="f-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></div>
+      <div class="f-icon">🔬</div>
       <h3>科学温和配方</h3>
       <p>经临床验证的温和有效成分，在确保效果的同时最大限度降低刺激，体验更自然舒适。</p>
     </div>
     <div class="f-card reveal d2">
-      <div class="f-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h18v18H3z"/><path d="M12 8v8M8 12h8"/></svg></div>
+      <div class="f-icon">🏥</div>
       <h3>三类医疗器械标准</h3>
       <p>国内唯一NMPA三类认证持久套，安全性有效性经过最严格的审核验证。</p>
     </div>
     <div class="f-card reveal d3">
-      <div class="f-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-6 18.75h9"/></svg></div>
+      <div class="f-icon">💊</div>
       <h3>制药级品控体系</h3>
       <p>依托朗圣23年药品研发体系，以「实验室级严谨」保障每一只产品的品质安全。</p>
     </div>
     <div class="f-card reveal d1">
-      <div class="f-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></div>
+      <div class="f-icon">❤️</div>
       <h3>情感体验优先</h3>
       <p>不以牺牲愉悦为代价。在延长时间的同时确保亲密感受不打折扣，让爱更完整。</p>
     </div>
     <div class="f-card reveal d2">
-      <div class="f-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+      <div class="f-icon">🛡️</div>
       <h3>双重安全保障</h3>
       <p>医疗器械级基础材质+科学配方双重保障，功能实现的同时守护亲密健康。</p>
     </div>
     <div class="f-card reveal d3">
-      <div class="f-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M23 6l-9.5 9.5-5-5L1 18"/><path d="M17 6h6v6"/></svg></div>
+      <div class="f-icon">📈</div>
       <h3>97% 用户推荐</h3>
       <p>上市以来收获大量真实好评，97%的用户表示愿意推荐，成为持久套品类标杆。</p>
     </div>
@@ -858,9 +887,19 @@ body::after{
   </div>
 </section>
 
+<!-- 3D Module 1: 包装盒展示 -->
+<section id="mod3d-1" class="sec-3d">
+  <div class="sec-3d-header">
+    <div class="label">Module 01</div>
+    <h2>3D 包装盒展示</h2>
+    <div class="subtitle">拖拽旋转，探索赤尾持久系列的精致工艺</div>
+  </div>
+  <div class="canvas-3d" id="canvas3d-1"></div>
+  <div class="hint-3d">拖拽旋转 / 滚轮缩放</div>
+</section>
+
 <!-- ===== BRAND VALUES ===== -->
 <section class="values-section" aria-labelledby="values-title">
-  <img class="values-bg-img" src="images/ip/赤尾ip-01.jpg" alt="" aria-hidden="true">
   <div class="values-content">
     <div class="reveal">
       <div class="tag-warm" style="background:rgba(255,255,255,.1);color:var(--gold-light)">品牌理念</div>
@@ -871,17 +910,17 @@ body::after{
     </div>
     <div class="values-grid">
       <div class="value-card reveal d1">
-        <span class="value-icon" aria-hidden="true"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M12 9h4M12 13h4M12 17h4"/><circle cx="7" cy="9" r="1" fill="#fff" stroke="none"/></svg></span>
+        <span class="value-icon" aria-hidden="true">🇨🇳</span>
         <h4>中国自研 · 国货底气</h4>
         <p>打破进口垄断，以自主知识产权展现中国智造在两性健康领域的硬核实力</p>
       </div>
       <div class="value-card reveal d2">
-        <span class="value-icon" aria-hidden="true"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 17l-2 2-4-4 2-2"/><path d="M13 7l2-2 4 4-2 2"/><path d="M7 12l-2 2 4 4 2-2"/><path d="M17 12l2-2-4-4-2 2"/></svg></span>
+        <span class="value-icon" aria-hidden="true">🤝</span>
         <h4>科技温度 · 情感链接</h4>
         <p>以科学手段化解焦虑，让亲密关系更轻松、更安心、更有深度</p>
       </div>
       <div class="value-card reveal d3">
-        <span class="value-icon" aria-hidden="true"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 21c3-3 6-3 9 0"/><path d="M12 21V11"/><path d="M17 2c-3 0-5 3-5 7s2 7 5 7"/><path d="M7 2c3 0 5 3 5 7s-2 7-5 7"/></svg></span>
+        <span class="value-icon" aria-hidden="true">🌱</span>
         <h4>健康守护 · 社会责任</h4>
         <p>守护国民生育健康，助力防控艾滋病，重塑中国避孕套口碑</p>
       </div>
@@ -889,100 +928,15 @@ body::after{
   </div>
 </section>
 
-<!-- ===== POLICY SUPPORT ===== -->
-<section style="padding:var(--pad);background:linear-gradient(180deg,var(--bg-warm),var(--bg-base));position:relative;overflow:hidden;" aria-labelledby="policy-title">
-  <!-- Decorative background -->
-  <div style="position:absolute;top:-10%;right:-5%;width:400px;height:400px;background:radial-gradient(circle,rgba(212,36,38,.04),transparent 70%);pointer-events:none;" aria-hidden="true"></div>
-  <div style="position:absolute;bottom:-10%;left:-5%;width:300px;height:300px;background:radial-gradient(circle,rgba(201,168,76,.05),transparent 60%);pointer-events:none;" aria-hidden="true"></div>
-
-  <div style="max-width:var(--w);margin:0 auto;position:relative;">
-    <div class="text-center" style="margin-bottom:var(--s12)">
-      <div class="tag-warm reveal">政策支撑 · 国家战略</div>
-      <h2 class="display-lg reveal d1" id="policy-title">生殖健康，国家在行动</h2>
-      <p class="body-text reveal d2" style="margin:var(--s3) auto 0;max-width:560px">
-        赤尾以制药级品质直接服务于多项国家战略，助力国民生殖健康与疾病防控
-      </p>
-    </div>
-
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s6);margin-bottom:var(--s10);">
-      <!-- Policy Card 1: 健康中国2030 -->
-      <div class="reveal d1" style="padding:var(--s8) var(--s6);background:var(--bg-white);border-radius:var(--radius);border:1px solid var(--border-light);transition:all .4s var(--ease);position:relative;overflow:hidden;" onmouseenter="this.style.transform='translateY(-6px)';this.style.boxShadow='var(--shadow-card-hover)'" onmouseleave="this.style.transform='';this.style.boxShadow=''">
-        <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--red),var(--gold));" aria-hidden="true"></div>
-        <div style="display:flex;align-items:center;gap:var(--s2);margin-bottom:var(--s4);">
-          <span style="width:36px;height:36px;border-radius:50%;background:rgba(212,36,38,.08);display:flex;align-items:center;justify-content:center;" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h18v18H3z"/><path d="M12 8v8M8 12h8"/></svg></span>
-          <span style="font-size:.7rem;color:var(--red);font-weight:600;letter-spacing:1px;">2016 · 国务院</span>
-        </div>
-        <h3 style="font-size:1.05rem;font-weight:700;margin-bottom:var(--s3);line-height:1.5;">「健康中国2030」<br>规划纲要</h3>
-        <p style="font-size:.85rem;color:var(--text-soft);line-height:1.9;">
-          明确将「减少不安全性行为」「普及避孕节育和生殖健康知识」列为国家战略，要求加强对性传播高危行为的综合干预，减少意外妊娠和性相关疾病传播。
-        </p>
-        <div style="margin-top:var(--s4);padding-top:var(--s4);border-top:1px solid var(--border-light);">
-          <p style="font-size:.78rem;color:var(--red);font-weight:500;line-height:1.7;">
-            赤尾以NMPA三类医疗器械认证品质，直接服务于国家生殖健康与艾滋病防控战略。
-          </p>
-        </div>
-      </div>
-
-      <!-- Policy Card 2: 艾滋病防控规划 -->
-      <div class="reveal d2" style="padding:var(--s8) var(--s6);background:var(--bg-white);border-radius:var(--radius);border:1px solid var(--border-light);transition:all .4s var(--ease);position:relative;overflow:hidden;" onmouseenter="this.style.transform='translateY(-6px)';this.style.boxShadow='var(--shadow-card-hover)'" onmouseleave="this.style.transform='';this.style.boxShadow=''">
-        <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--red),var(--gold));" aria-hidden="true"></div>
-        <div style="display:flex;align-items:center;gap:var(--s2);margin-bottom:var(--s4);">
-          <span style="width:36px;height:36px;border-radius:50%;background:rgba(212,36,38,.08);display:flex;align-items:center;justify-content:center;" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
-          <span style="font-size:.7rem;color:var(--red);font-weight:600;letter-spacing:1px;">2024 · 国务院</span>
-        </div>
-        <h3 style="font-size:1.05rem;font-weight:700;margin-bottom:var(--s3);line-height:1.5;">艾滋病防控规划<br>（2024—2030）</h3>
-        <p style="font-size:.85rem;color:var(--text-soft);line-height:1.9;">
-          要求「全面落实宾馆等公共场所摆放安全套」，将综合干预覆盖率目标设定为95%以上，继续将艾滋病控制在低流行水平，覆盖青少年与中老年人群。
-        </p>
-        <div style="margin-top:var(--s4);padding-top:var(--s4);border-top:1px solid var(--border-light);">
-          <p style="font-size:.78rem;color:var(--red);font-weight:500;line-height:1.7;">
-            赤尾以制药级品质助力国家公共卫生安全，是综合干预措施的重要物质保障。
-          </p>
-        </div>
-      </div>
-
-      <!-- Policy Card 3: 医疗器械监管条例 -->
-      <div class="reveal d3" style="padding:var(--s8) var(--s6);background:var(--bg-white);border-radius:var(--radius);border:1px solid var(--border-light);transition:all .4s var(--ease);position:relative;overflow:hidden;" onmouseenter="this.style.transform='translateY(-6px)';this.style.boxShadow='var(--shadow-card-hover)'" onmouseleave="this.style.transform='';this.style.boxShadow=''">
-        <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--red),var(--gold));" aria-hidden="true"></div>
-        <div style="display:flex;align-items:center;gap:var(--s2);margin-bottom:var(--s4);">
-          <span style="width:36px;height:36px;border-radius:50%;background:rgba(212,36,38,.08);display:flex;align-items:center;justify-content:center;" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></span>
-          <span style="font-size:.7rem;color:var(--red);font-weight:600;letter-spacing:1px;">2020 · 国务院</span>
-        </div>
-        <h3 style="font-size:1.05rem;font-weight:700;margin-bottom:var(--s3);line-height:1.5;">医疗器械监督<br>管理条例</h3>
-        <p style="font-size:.85rem;color:var(--text-soft);line-height:1.9;">
-          避孕套被列为第三类医疗器械（最高监管等级），须经NMPA严格审批，需完成临床试验和质量体系核查。条例明确国家支持医疗器械自主创新。
-        </p>
-        <div style="margin-top:var(--s4);padding-top:var(--s4);border-top:1px solid var(--border-light);">
-          <p style="font-size:.78rem;color:var(--red);font-weight:500;line-height:1.7;">
-            赤尾历经7年研发获NMPA三类注册证，是国产避孕套行业品质升级的标志性事件。
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Summary statement -->
-    <div class="reveal" style="text-align:center;padding:var(--s8) var(--s6);background:linear-gradient(135deg,rgba(212,36,38,.06),rgba(201,168,76,.06));border-radius:var(--radius);border:1px solid var(--border-light);">
-      <p style="font-size:.95rem;color:var(--text-main);line-height:2;max-width:700px;margin:0 auto;font-weight:500;">
-        从「健康中国2030」到「艾滋病防控规划」，从「三类医疗器械监管」到「自主创新优先审评」— 赤尾以制药级品控和NMPA三类认证，精准回应国家战略对生殖健康、疾病防控与国产技术突破的三重需求。
-      </p>
-      <div style="display:flex;justify-content:center;gap:var(--s8);margin-top:var(--s6);flex-wrap:wrap;">
-        <div style="text-align:center;">
-          <div style="font-family:var(--font-display);font-size:1.6rem;font-weight:900;color:var(--red);" data-count="95">0</div>
-          <div style="font-size:.7rem;color:var(--text-muted);margin-top:var(--s1);">% 干预覆盖率目标</div>
-        </div>
-        <div style="width:1px;background:var(--border-light);" aria-hidden="true"></div>
-        <div style="text-align:center;">
-          <div style="font-family:var(--font-display);font-size:1.6rem;font-weight:900;color:var(--red);" data-count="3">0</div>
-          <div style="font-size:.7rem;color:var(--text-muted);margin-top:var(--s1);">类医疗器械最高等级</div>
-        </div>
-        <div style="width:1px;background:var(--border-light);" aria-hidden="true"></div>
-        <div style="text-align:center;">
-          <div style="font-family:var(--font-display);font-size:1.6rem;font-weight:900;color:var(--red);" data-count="4">0</div>
-          <div style="font-size:.7rem;color:var(--text-muted);margin-top:var(--s1);">项国家战略文件支撑</div>
-        </div>
-      </div>
-    </div>
+<!-- 3D Module 2: 开盒动画 -->
+<section id="mod3d-2" class="sec-3d">
+  <div class="sec-3d-header">
+    <div class="label">Module 02</div>
+    <h2>开盒动画</h2>
+    <div class="subtitle">点击包装盒，揭秘赤尾持久系列的内在品质</div>
   </div>
+  <div class="canvas-3d" id="canvas3d-2"></div>
+  <div class="hint-3d">点击盒子开合</div>
 </section>
 
 <!-- ===== FAQ ===== -->
@@ -1029,6 +983,22 @@ body::after{
       </div>
     </div>
   </div>
+</section>
+
+<!-- 3D Module 3: 七年研发时间线 -->
+<section id="mod3d-3" class="sec-3d">
+  <div class="sec-3d-header">
+    <div class="label">Module 03</div>
+    <h2>七年研发时间线</h2>
+    <div class="subtitle">2014 - 2021，从品牌创立到NMPA认证的匠心之路</div>
+  </div>
+  <div class="canvas-3d" id="canvas3d-3"></div>
+  <div id="timeline-card-3d" class="info-card-3d">
+    <div class="year" id="card-year-3d"></div>
+    <div class="event" id="card-event-3d"></div>
+    <div class="desc" id="card-desc-3d"></div>
+  </div>
+  <div class="hint-3d">悬停里程碑查看 / 滚动浏览</div>
 </section>
 
 <!-- ===== REVIEWS ===== -->
@@ -1137,6 +1107,32 @@ body::after{
   <a href="#top" class="btn-primary reveal d2" onclick="scrollToTop(event)">返回顶部 ↑</a>
 </section>
 
+<!-- ===== WORKS INFO ===== -->
+<section class="works-info" aria-label="作品说明">
+  <div class="text-center" style="margin-bottom:var(--s10)">
+    <div class="tag-warm reveal">参赛信息</div>
+    <h2 class="display-lg reveal d1" style="font-size:clamp(1.2rem,2vw,1.8rem)">2026第16届大广赛 · UI类参赛作品</h2>
+  </div>
+  <div class="works-info-grid reveal d2">
+    <div class="works-info-card">
+      <h3>作品名称</h3>
+      <p style="font-weight:500">赤尾持久系列电商详情页<br>——「爱，值得更长时间沉淀」</p>
+    </div>
+    <div class="works-info-card">
+      <h3>创意概述</h3>
+      <p>以暖色调编辑风呈现赤尾经典持久套的NMPA三类医疗器械认证，融合情感叙事与科技信任。通过故事化场景、认证展示、品牌价值等模块传递"科技让爱更贴近"的品牌主张。</p>
+    </div>
+    <div class="works-info-card">
+      <h3>素材来源</h3>
+      <p>赤尾品牌命题素材包（产品图、LOGO、IP形象）<br>大广赛官方命题文档 · 朗圣药业官网</p>
+    </div>
+    <div class="works-info-card">
+      <h3>AI辅助工具</h3>
+      <p>DeepSeek（前端开发 / UI设计 / 代码审核）<br>设计审核Agent · 视觉分析Agent</p>
+    </div>
+  </div>
+</section>
+
 <!-- ===== FOOTER ===== -->
 <footer class="footer">
   <nav class="footer-links" aria-label="底部导航">
@@ -1148,6 +1144,19 @@ body::after{
   </nav>
   <p class="footer-copy">© 2026 朗圣药业 · 赤尾品牌 | 本页面为2026第16届大广赛UI类参赛作品</p>
 </footer>
+
+<!-- 3D Module 4: NMPA认证徽章 -->
+<section id="mod3d-4" class="sec-3d">
+  <div class="sec-3d-header">
+    <div class="label">Module 04</div>
+    <h2>NMPA 认证徽章</h2>
+    <div class="subtitle">三类医疗器械认证，品质与安全的双重保障</div>
+  </div>
+  <div class="canvas-3d" id="canvas3d-4"></div>
+  <div id="stamp-text-3d" class="stamp-text-3d">认证通过</div>
+  <div class="hint-3d">点击徽章触发认证印章</div>
+</section>
+<!-- ===== END 3D MODULES ===== -->
 
 <script>
 // ========== REVEAL ==========
@@ -1236,78 +1245,61 @@ setTimeout(showSocialToast,2000)
 setInterval(showSocialToast,6000)
 
 function scrollToTop(e){e.preventDefault();window.scrollTo({top:0,behavior:'smooth'})}
-
-// ========== COUNTER ANIMATION ==========
-function animateCounters(){
-  document.querySelectorAll('[data-count]').forEach(el=>{
-    if(el.dataset.animated) return
-    const target = parseInt(el.dataset.count)
-    const duration = 1800
-    const start = performance.now()
-    function step(now){
-      const progress = Math.min((now - start)/duration,1)
-      const eased = 1 - Math.pow(1 - progress,3)
-      el.textContent = Math.round(target * eased)
-      if(progress < 1) requestAnimationFrame(step)
-      else el.textContent = target
-    }
-    el.dataset.animated = 'true'
-    requestAnimationFrame(step)
-  })
-}
-const counterObs = new IntersectionObserver(entries=>{
-  entries.forEach(e=>{if(e.isIntersecting)animateCounters()})
-},{threshold:.3})
-document.querySelectorAll('[data-count]').forEach(el=>{
-  const parent = el.closest('section') || el.parentElement
-  if(parent) counterObs.observe(parent)
-})
-
-// ========== CARD TILT EFFECT ==========
-document.querySelectorAll('.f-card, .value-card').forEach(card=>{
-  card.addEventListener('mousemove',e=>{
-    const rect = card.getBoundingClientRect()
-    const x = (e.clientX - rect.left) / rect.width - 0.5
-    const y = (e.clientY - rect.top) / rect.height - 0.5
-    card.style.transform = `translateY(-6px) perspective(600px) rotateX(${-y*6}deg) rotateY(${x*6}deg)`
-  })
-  card.addEventListener('mouseleave',()=>{
-    card.style.transform = ''
-  })
-})
-
-// ========== STAGGER REVEAL FOR GRID ITEMS ==========
-const staggerObs = new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting){
-      const items = e.target.querySelectorAll('.f-card, .value-card, .review-card, .coupon-card')
-      items.forEach((item,i)=>{
-        item.style.opacity = '0'
-        item.style.transform = 'translateY(24px)'
-        setTimeout(()=>{
-          item.style.transition = 'all .6s cubic-bezier(.16,1,.3,1)'
-          item.style.opacity = '1'
-          item.style.transform = 'translateY(0)'
-        }, i * 100)
-      })
-      staggerObs.unobserve(e.target)
-    }
-  })
-},{threshold:.15})
-document.querySelectorAll('.features-grid, .values-grid, .reviews-grid, .coupon-grid').forEach(g=>staggerObs.observe(g))
-
-// ========== SMOOTH SCROLL FOR ANCHOR LINKS ==========
-document.querySelectorAll('a[href^="#"]').forEach(a=>{
-  a.addEventListener('click',e=>{
-    const target = document.querySelector(a.getAttribute('href'))
-    if(target){
-      e.preventDefault()
-      target.scrollIntoView({behavior:'smooth',block:'start'})
-    }
-  })
-})
-
 console.log('赤尾 · 持久系列详情页 — 升级版 loaded ✓')
 </script>
+
+<!-- ===== 3D INTERACTIVE MODULE SCRIPT ===== -->
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+  }
+}
+</script>
+<script type="module">
+import * as THREE from 'three';
+
+const COLORS3D={cream:0xFFF8F0,red:0xD42426,gold:0xC9A84C,dark:0x1A0A0A,darkWarm:0x2A1515};
+
+function createRenderer3D(c){const r=new THREE.WebGLRenderer({antialias:true,alpha:true});r.setPixelRatio(Math.min(window.devicePixelRatio,2));r.setSize(c.clientWidth,c.clientHeight);r.toneMapping=THREE.ACESFilmicToneMapping;r.toneMappingExposure=1.2;c.appendChild(r.domElement);return r}
+function easeInOutCubic3d(t){return t<0.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2}
+function lerp3d(a,b,t){return a+(b-a)*t}
+function createParticleField3D(count,range,color,size){const g=new THREE.BufferGeometry();const p=new Float32Array(count*3);for(let i=0;i<count;i++){p[i*3]=(Math.random()-0.5)*range;p[i*3+1]=(Math.random()-0.5)*range;p[i*3+2]=(Math.random()-0.5)*range}g.setAttribute('position',new THREE.BufferAttribute(p,3));const m=new THREE.PointsMaterial({color,size:size||0.03,transparent:true,opacity:0.6,blending:THREE.AdditiveBlending,depthWrite:false});return new THREE.Points(g,m)}
+
+/* MODULE 1: 3D Box Display */
+(function(){const container=document.getElementById('canvas3d-1');if(!container)return;const scene=new THREE.Scene();scene.background=new THREE.Color(COLORS3D.dark);scene.fog=new THREE.FogExp2(COLORS3D.dark,0.08);const camera=new THREE.PerspectiveCamera(45,container.clientWidth/container.clientHeight,0.1,100);camera.position.set(0,1.5,5);camera.lookAt(0,0.3,0);const renderer=createRenderer3D(container);scene.add(new THREE.AmbientLight(0xFFF8F0,0.4));const ml=new THREE.DirectionalLight(0xFFF8F0,1.2);ml.position.set(3,5,4);scene.add(ml);const rl=new THREE.DirectionalLight(COLORS3D.gold,0.6);rl.position.set(-3,2,-2);scene.add(rl);const pl=new THREE.PointLight(COLORS3D.red,0.8,10);pl.position.set(2,2,2);scene.add(pl);
+
+function createBoxTex(){const c=document.createElement('canvas');c.width=512;c.height=640;const ctx=c.getContext('2d');const g=ctx.createLinearGradient(0,0,0,640);g.addColorStop(0,'#1A0808');g.addColorStop(0.5,'#2A1010');g.addColorStop(1,'#1A0808');ctx.fillStyle=g;ctx.fillRect(0,0,512,640);ctx.strokeStyle='rgba(201,168,76,0.05)';for(let i=0;i<30;i++){ctx.beginPath();ctx.moveTo(0,i*22);ctx.lineTo(512,i*22);ctx.stroke()}ctx.strokeStyle='#C9A84C';ctx.lineWidth=3;ctx.strokeRect(20,20,472,600);ctx.strokeStyle='rgba(201,168,76,0.3)';ctx.lineWidth=1;ctx.strokeRect(30,30,452,580);ctx.fillStyle='#C9A84C';ctx.font='600 28px "Noto Serif SC",serif';ctx.textAlign='center';ctx.fillText('赤 尾',256,120);ctx.font='300 14px sans-serif';ctx.fillStyle='rgba(201,168,76,0.6)';ctx.fillText('CHIWEI',256,150);ctx.strokeStyle='#C9A84C';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(156,175);ctx.lineTo(356,175);ctx.stroke();ctx.fillStyle='#FFF8F0';ctx.font='700 42px "Noto Serif SC",serif';ctx.fillText('持久系列',256,250);ctx.fillStyle='rgba(255,248,240,0.5)';ctx.font='300 16px sans-serif';ctx.fillText('PREMIUM SERIES',256,285);ctx.fillStyle='#C9A84C';ctx.save();ctx.translate(256,340);ctx.rotate(Math.PI/4);ctx.fillRect(-8,-8,16,16);ctx.restore();ctx.fillStyle='rgba(255,248,240,0.4)';ctx.font='300 13px sans-serif';ctx.fillText('超薄工艺 / 极致体验',256,420);ctx.beginPath();ctx.arc(256,510,35,0,Math.PI*2);ctx.strokeStyle='#D42426';ctx.lineWidth=2;ctx.stroke();ctx.fillStyle='#D42426';ctx.font='700 11px sans-serif';ctx.fillText('NMPA',256,508);ctx.font='300 10px sans-serif';ctx.fillStyle='rgba(255,248,240,0.6)';ctx.fillText('三类医疗器械',256,525);ctx.fillStyle='rgba(201,168,76,0.5)';ctx.font='300 12px sans-serif';ctx.fillText('3只装 / 52mm',256,585);return new THREE.CanvasTexture(c)}
+
+function createSideTex(){const c=document.createElement('canvas');c.width=128;c.height=640;const ctx=c.getContext('2d');const g=ctx.createLinearGradient(0,0,0,640);g.addColorStop(0,'#1A0808');g.addColorStop(0.5,'#220E0E');g.addColorStop(1,'#1A0808');ctx.fillStyle=g;ctx.fillRect(0,0,128,640);ctx.strokeStyle='rgba(201,168,76,0.15)';ctx.lineWidth=1;ctx.strokeRect(5,5,118,630);return new THREE.CanvasTexture(c)}
+
+function createTopTex(){const c=document.createElement('canvas');c.width=512;c.height=128;const ctx=c.getContext('2d');const g=ctx.createLinearGradient(0,0,512,0);g.addColorStop(0,'#1A0808');g.addColorStop(0.5,'#251010');g.addColorStop(1,'#1A0808');ctx.fillStyle=g;ctx.fillRect(0,0,512,128);ctx.strokeStyle='rgba(201,168,76,0.15)';ctx.lineWidth=1;ctx.strokeRect(5,5,502,118);ctx.fillStyle='#C9A84C';ctx.font='600 24px serif';ctx.textAlign='center';ctx.fillText('赤尾持久',256,75);return new THREE.CanvasTexture(c)}
+
+const boxGroup=new THREE.Group();const frontTex=createBoxTex();const sideTex=createSideTex();const topTex=createTopTex();const boxGeo=new THREE.BoxGeometry(1.6,2,0.8);const boxMats=[new THREE.MeshStandardMaterial({map:sideTex,roughness:0.3,metalness:0.1}),new THREE.MeshStandardMaterial({map:sideTex,roughness:0.3,metalness:0.1}),new THREE.MeshStandardMaterial({map:topTex,roughness:0.3,metalness:0.1}),new THREE.MeshStandardMaterial({color:0x1A0808,roughness:0.3,metalness:0.1}),new THREE.MeshStandardMaterial({map:frontTex,roughness:0.2,metalness:0.05}),new THREE.MeshStandardMaterial({map:sideTex,roughness:0.3,metalness:0.1})];const box=new THREE.Mesh(boxGeo,boxMats);box.position.y=1;boxGroup.add(box);const ribbonH=new THREE.Mesh(new THREE.BoxGeometry(1.65,0.12,0.82),new THREE.MeshStandardMaterial({color:COLORS3D.gold,roughness:0.15,metalness:0.8}));ribbonH.position.y=1;boxGroup.add(ribbonH);const ribbonV=new THREE.Mesh(new THREE.BoxGeometry(0.12,2.05,0.82),new THREE.MeshStandardMaterial({color:COLORS3D.gold,roughness:0.15,metalness:0.8}));ribbonV.position.y=1;boxGroup.add(ribbonV);const bow=new THREE.Mesh(new THREE.TorusKnotGeometry(0.15,0.04,64,8,2,3),new THREE.MeshStandardMaterial({color:COLORS3D.gold,roughness:0.1,metalness:0.9}));bow.position.set(0,2.05,0.05);bow.rotation.x=Math.PI/2;boxGroup.add(bow);scene.add(boxGroup);const ground=new THREE.Mesh(new THREE.PlaneGeometry(20,20),new THREE.MeshStandardMaterial({color:COLORS3D.dark,roughness:0.1,metalness:0.8,transparent:true,opacity:0.6}));ground.rotation.x=-Math.PI/2;ground.position.y=-0.01;scene.add(ground);const redP=createParticleField3D(200,8,COLORS3D.red,0.025);const goldP=createParticleField3D(150,8,COLORS3D.gold,0.02);scene.add(redP);scene.add(goldP);let isDrag=false,prevM={x:0,y:0},rotV={x:0,y:0},boxR={x:0.3,y:0};renderer.domElement.addEventListener('pointerdown',e=>{isDrag=true;prevM={x:e.clientX,y:e.clientY}});window.addEventListener('pointermove',e=>{if(!isDrag)return;rotV.y=(e.clientX-prevM.x)*0.005;rotV.x=(e.clientY-prevM.y)*0.005;prevM={x:e.clientX,y:e.clientY}});window.addEventListener('pointerup',()=>{isDrag=false});renderer.domElement.addEventListener('wheel',e=>{camera.position.z=Math.max(3,Math.min(8,camera.position.z+e.deltaY*0.005))},{passive:true});let time3d=0;function animate(){requestAnimationFrame(animate);time3d+=0.016;if(!isDrag){rotV.y+=0.001;rotV.x*=0.95;rotV.y*=0.95}boxR.y+=rotV.y;boxR.x+=rotV.x;boxR.x=Math.max(-0.5,Math.min(0.8,boxR.x));boxGroup.rotation.y=boxR.y;boxGroup.rotation.x=boxR.x;boxGroup.position.y=Math.sin(time3d*0.8)*0.1;redP.rotation.y+=0.0005;goldP.rotation.y-=0.0003;redP.position.y=Math.sin(time3d*0.5)*0.1;goldP.position.y=Math.cos(time3d*0.3)*0.1;pl.position.x=Math.sin(time3d*0.7)*3;pl.position.z=Math.cos(time3d*0.7)*3;renderer.render(scene,camera)}animate();window.addEventListener('resize',()=>{camera.aspect=container.clientWidth/container.clientHeight;camera.updateProjectionMatrix();renderer.setSize(container.clientWidth,container.clientHeight)})})();
+
+/* MODULE 2: Box Opening */
+(function(){const container=document.getElementById('canvas3d-2');if(!container)return;const scene=new THREE.Scene();scene.background=new THREE.Color(COLORS3D.darkWarm);scene.fog=new THREE.FogExp2(COLORS3D.darkWarm,0.06);const camera=new THREE.PerspectiveCamera(40,container.clientWidth/container.clientHeight,0.1,100);camera.position.set(0,2.5,5.5);camera.lookAt(0,0.8,0);const renderer=createRenderer3D(container);scene.add(new THREE.AmbientLight(0xFFF8F0,0.3));const dl2=new THREE.DirectionalLight(0xFFF8F0,1);dl2.position.set(2,5,3);scene.add(dl2);const wl=new THREE.PointLight(COLORS3D.gold,0.5,8);wl.position.set(0,1.5,2);scene.add(wl);const glowL=new THREE.PointLight(COLORS3D.red,0,5);glowL.position.set(0,1,0);scene.add(glowL);
+
+function createBoxBodyTex(){const c=document.createElement('canvas');c.width=512;c.height=512;const ctx=c.getContext('2d');const g=ctx.createLinearGradient(0,0,0,512);g.addColorStop(0,'#1A0808');g.addColorStop(0.5,'#251010');g.addColorStop(1,'#1A0808');ctx.fillStyle=g;ctx.fillRect(0,0,512,512);ctx.strokeStyle='rgba(201,168,76,0.2)';ctx.lineWidth=2;ctx.strokeRect(15,15,482,482);ctx.fillStyle='#C9A84C';ctx.font='600 36px serif';ctx.textAlign='center';ctx.fillText('赤尾持久',256,280);ctx.font='300 18px sans-serif';ctx.fillStyle='rgba(255,248,240,0.4)';ctx.fillText('PREMIUM SERIES',256,320);return new THREE.CanvasTexture(c)}
+
+const bodyTex=createBoxBodyTex();const bodyGeo=new THREE.BoxGeometry(2,1,1.2);const bodyMats=[new THREE.MeshStandardMaterial({color:0x1A0808,roughness:0.3}),new THREE.MeshStandardMaterial({color:0x1A0808,roughness:0.3}),new THREE.MeshStandardMaterial({color:0x1A0808,roughness:0.3}),new THREE.MeshStandardMaterial({color:0x1A0808,roughness:0.3}),new THREE.MeshStandardMaterial({map:bodyTex,roughness:0.2}),new THREE.MeshStandardMaterial({color:0x1A0808,roughness:0.3})];const body=new THREE.Mesh(bodyGeo,bodyMats);body.position.y=0.5;const lidPivot=new THREE.Group();lidPivot.position.set(0,1,-0.6);const lidGeo=new THREE.BoxGeometry(2,0.15,1.2);const lidMats=[new THREE.MeshStandardMaterial({color:0x200C0C,roughness:0.3}),new THREE.MeshStandardMaterial({color:0x200C0C,roughness:0.3}),new THREE.MeshStandardMaterial({map:bodyTex,roughness:0.2}),new THREE.MeshStandardMaterial({color:0x1A0808,roughness:0.3}),new THREE.MeshStandardMaterial({color:0x200C0C,roughness:0.3}),new THREE.MeshStandardMaterial({color:0x200C0C,roughness:0.3})];const lid=new THREE.Mesh(lidGeo,lidMats);lid.position.set(0,0.075,0.6);lidPivot.add(lid);const ribbonLid=new THREE.Mesh(new THREE.BoxGeometry(2.05,0.18,0.05),new THREE.MeshStandardMaterial({color:COLORS3D.gold,roughness:0.15,metalness:0.8}));ribbonLid.position.set(0,0.075,0.6);lidPivot.add(ribbonLid);const boxGroup2=new THREE.Group();boxGroup2.add(body);boxGroup2.add(lidPivot);scene.add(boxGroup2);const productGroup=new THREE.Group();const productGeo=new THREE.CylinderGeometry(0.15,0.15,1.2,32);const productMat=new THREE.MeshStandardMaterial({color:0xFFE4C4,roughness:0.2,metalness:0.1,emissive:COLORS3D.red,emissiveIntensity:0});const product=new THREE.Mesh(productGeo,productMat);product.rotation.z=Math.PI/2;product.position.y=0.6;productGroup.add(product);const haloGeo=new THREE.TorusGeometry(0.35,0.05,16,32);const haloMat=new THREE.MeshBasicMaterial({color:COLORS3D.red,transparent:true,opacity:0,blending:THREE.AdditiveBlending});const halo=new THREE.Mesh(haloGeo,haloMat);halo.rotation.x=Math.PI/2;halo.position.y=0.6;productGroup.add(halo);productGroup.visible=false;scene.add(productGroup);const ground2=new THREE.Mesh(new THREE.PlaneGeometry(20,20),new THREE.MeshStandardMaterial({color:COLORS3D.dark,roughness:0.1,metalness:0.8,transparent:true,opacity:0.5}));ground2.rotation.x=-Math.PI/2;scene.add(ground2);const particles2=createParticleField3D(100,6,COLORS3D.red,0.02);scene.add(particles2);let isOpen=false,animProg=0,animTarg=0,camTZ=5.5,camTY=2.5;renderer.domElement.addEventListener('click',()=>{isOpen=!isOpen;animTarg=isOpen?1:0;camTZ=isOpen?3.5:5.5;camTY=isOpen?2:2.5;if(isOpen)productGroup.visible=true});renderer.domElement.style.cursor='pointer';let t2=0;function animate2(){requestAnimationFrame(animate2);t2+=0.016;animProg=lerp3d(animProg,animTarg,0.04);const ep=easeInOutCubic3d(animProg);lidPivot.rotation.x=-ep*(110*Math.PI/180);const gi=Math.max(0,ep-0.3)/0.7;productMat.emissiveIntensity=gi*0.5;glowL.intensity=gi*2;haloMat.opacity=gi*0.4;halo.scale.setScalar(1+Math.sin(t2*2)*0.1);camera.position.z=lerp3d(camera.position.z,camTZ,0.03);camera.position.y=lerp3d(camera.position.y,camTY,0.03);camera.lookAt(0,0.8,0);if(animProg<0.02&&!isOpen)productGroup.visible=false;boxGroup2.rotation.y=Math.sin(t2*0.3)*0.15+0.2;particles2.rotation.y+=0.001;particles2.position.y=Math.sin(t2*0.4)*0.2;renderer.render(scene,camera)}animate2();window.addEventListener('resize',()=>{camera.aspect=container.clientWidth/container.clientHeight;camera.updateProjectionMatrix();renderer.setSize(container.clientWidth,container.clientHeight)})})();
+
+/* MODULE 3: 7-Year Timeline */
+(function(){const container=document.getElementById('canvas3d-3');if(!container)return;const scene=new THREE.Scene();scene.background=new THREE.Color(COLORS3D.dark);scene.fog=new THREE.FogExp2(COLORS3D.dark,0.03);const camera=new THREE.PerspectiveCamera(50,container.clientWidth/container.clientHeight,0.1,200);camera.position.set(0,3,12);const renderer=createRenderer3D(container);renderer.shadowMap.enabled=true;scene.add(new THREE.AmbientLight(0xFFF8F0,0.3));const sl=new THREE.DirectionalLight(0xFFF8F0,0.8);sl.position.set(5,10,5);scene.add(sl);const milestones=[{year:'2014',event:'品牌创立',desc:'赤尾品牌正式成立，立志打造国产高端避孕套品牌，开启研发之路。'},{year:'2015',event:'技术研发启动',desc:'组建核心研发团队，与国内顶级材料实验室建立合作，攻克超薄乳胶技术难题。'},{year:'2016',event:'首条产线投产',desc:'引进国际先进生产线，实现从原材料到成品的全流程品控，年产能力突破亿只。'},{year:'2017',event:'突破0.03mm',desc:'自主研发的超薄工艺取得突破性进展，成功量产0.03mm超薄系列产品。'},{year:'2018',event:'百万用户里程碑',desc:'累计服务超过百万用户，获得市场广泛认可，成为国产高端品牌代表。'},{year:'2019',event:'持久系列研发',desc:'历时两年攻关，成功研发持久延时技术，为持久系列奠定技术基础。'},{year:'2021',event:'NMPA认证',desc:'赤尾持久系列正式通过NMPA三类医疗器械认证，品质与安全获国家权威认可。'}];const curvePoints=[];for(let i=0;i<milestones.length;i++){const t=i/(milestones.length-1);curvePoints.push(new THREE.Vector3((t-0.5)*18,Math.sin(t*Math.PI*1.5)*2+1,Math.sin(t*Math.PI)*-3))}const curve=new THREE.CatmullRomCurve3(curvePoints);const tubeGeo=new THREE.TubeGeometry(curve,200,0.05,8,false);const tubeMat=new THREE.MeshStandardMaterial({color:COLORS3D.gold,roughness:0.2,metalness:0.8,emissive:COLORS3D.gold,emissiveIntensity:0.15});scene.add(new THREE.Mesh(tubeGeo,tubeMat));const tpCount=500;const tpGeo=new THREE.BufferGeometry();const tpPos=new Float32Array(tpCount*3);for(let i=0;i<tpCount;i++){const pt=curve.getPointAt(Math.random());tpPos[i*3]=pt.x+(Math.random()-0.5)*0.5;tpPos[i*3+1]=pt.y+(Math.random()-0.5)*0.5;tpPos[i*3+2]=pt.z+(Math.random()-0.5)*0.5}tpGeo.setAttribute('position',new THREE.BufferAttribute(tpPos,3));scene.add(new THREE.Points(tpGeo,new THREE.PointsMaterial({color:COLORS3D.red,size:0.04,transparent:true,opacity:0.7,blending:THREE.AdditiveBlending,depthWrite:false})));const spheres=[];const raycaster=new THREE.Raycaster();const mouse=new THREE.Vector2(-999,-999);milestones.forEach((m,i)=>{const t=i/(milestones.length-1);const pos=curve.getPointAt(t);const sphere=new THREE.Mesh(new THREE.SphereGeometry(0.25,32,32),new THREE.MeshStandardMaterial({color:COLORS3D.gold,roughness:0.1,metalness:0.9,emissive:COLORS3D.gold,emissiveIntensity:0.3}));sphere.position.copy(pos);sphere.userData={index:i,baseEmissive:0.3};scene.add(sphere);spheres.push(sphere);const ring=new THREE.Mesh(new THREE.TorusGeometry(0.35,0.02,16,32),new THREE.MeshBasicMaterial({color:COLORS3D.red,transparent:true,opacity:0.3,blending:THREE.AdditiveBlending}));ring.position.copy(pos);ring.lookAt(camera.position);scene.add(ring);const lc=document.createElement('canvas');lc.width=256;lc.height=64;const lx=lc.getContext('2d');lx.fillStyle='#C9A84C';lx.font='600 28px sans-serif';lx.textAlign='center';lx.fillText(m.year,128,42);const lt=new THREE.CanvasTexture(lc);const lm=new THREE.SpriteMaterial({map:lt,transparent:true,opacity:0.8});const label=new THREE.Sprite(lm);label.position.set(pos.x,pos.y+0.6,pos.z);label.scale.set(1.2,0.3,1);scene.add(label)});scene.add(createParticleField3D(300,20,COLORS3D.cream,0.015));const infoCard=document.getElementById('timeline-card-3d');const cardYear=document.getElementById('card-year-3d');const cardEvent=document.getElementById('card-event-3d');const cardDesc=document.getElementById('card-desc-3d');let activeIdx=-1;renderer.domElement.addEventListener('mousemove',e=>{const rect=renderer.domElement.getBoundingClientRect();mouse.x=((e.clientX-rect.left)/rect.width)*2-1;mouse.y=-((e.clientY-rect.top)/rect.height)*2+1;raycaster.setFromCamera(mouse,camera);const hits=raycaster.intersectObjects(spheres);if(hits.length>0){const idx=hits[0].object.userData.index;if(idx!==activeIdx){activeIdx=idx;cardYear.textContent=milestones[idx].year;cardEvent.textContent=milestones[idx].event;cardDesc.textContent=milestones[idx].desc;infoCard.classList.add('visible');const sp=hits[0].object.position.clone().project(camera);const x=(sp.x*0.5+0.5)*container.clientWidth;const y=-(sp.y*0.5-0.5)*container.clientHeight;infoCard.style.left=Math.min(x+20,container.clientWidth-340)+'px';infoCard.style.top=Math.max(y-80,20)+'px'}renderer.domElement.style.cursor='pointer'}else{if(activeIdx!==-1){activeIdx=-1;infoCard.classList.remove('visible')}renderer.domElement.style.cursor='default'}});let scrollProg=0;const sec3=document.getElementById('mod3d-3');function updateScroll(){const r=sec3.getBoundingClientRect();scrollProg=Math.max(0,Math.min(1,-r.top/(r.height-window.innerHeight)))}window.addEventListener('scroll',updateScroll,{passive:true});let t3=0;function animate3(){requestAnimationFrame(animate3);t3+=0.016;const ct=Math.max(0.01,Math.min(0.99,scrollProg));const cp=curve.getPointAt(ct);const la=curve.getPointAt(Math.min(1,ct+0.1));camera.position.x=lerp3d(camera.position.x,cp.x,0.03);camera.position.y=lerp3d(camera.position.y,cp.y+2,0.03);camera.position.z=lerp3d(camera.position.z,cp.z+6,0.03);camera.lookAt(la.x,la.y,la.z);spheres.forEach((s,i)=>{s.scale.setScalar(1+Math.sin(t3*2+i)*0.15);s.material.emissiveIntensity=s.userData.baseEmissive+Math.sin(t3*1.5+i)*0.15;if(i===activeIdx){s.material.emissiveIntensity=1;s.scale.setScalar(1.4)}});const tpA=tpGeo.attributes.position.array;for(let i=0;i<tpCount;i++)tpA[i*3+1]+=Math.sin(t3+i*0.1)*0.001;tpGeo.attributes.position.needsUpdate=true;renderer.render(scene,camera)}animate3();window.addEventListener('resize',()=>{camera.aspect=container.clientWidth/container.clientHeight;camera.updateProjectionMatrix();renderer.setSize(container.clientWidth,container.clientHeight)})})();
+
+/* MODULE 4: NMPA Badge */
+(function(){const container=document.getElementById('canvas3d-4');if(!container)return;const scene=new THREE.Scene();scene.background=new THREE.Color(COLORS3D.dark);scene.fog=new THREE.FogExp2(COLORS3D.dark,0.05);const camera=new THREE.PerspectiveCamera(40,container.clientWidth/container.clientHeight,0.1,100);camera.position.set(0,0,6);const renderer=createRenderer3D(container);scene.add(new THREE.AmbientLight(0xFFF8F0,0.4));const kl=new THREE.DirectionalLight(0xFFF8F0,1.2);kl.position.set(3,3,5);scene.add(kl);const fl=new THREE.DirectionalLight(COLORS3D.gold,0.4);fl.position.set(-3,1,3);scene.add(fl);
+
+function createBadgeTex(){const c=document.createElement('canvas');c.width=1024;c.height=1024;const ctx=c.getContext('2d');const cx=512,cy=512;const g=ctx.createRadialGradient(cx,cy,100,cx,cy,500);g.addColorStop(0,'#E8D48B');g.addColorStop(0.3,'#C9A84C');g.addColorStop(0.7,'#A88A3A');g.addColorStop(1,'#8B7230');ctx.fillStyle=g;ctx.beginPath();ctx.arc(cx,cy,490,0,Math.PI*2);ctx.fill();ctx.strokeStyle='#E8D48B';ctx.lineWidth=4;ctx.beginPath();ctx.arc(cx,cy,440,0,Math.PI*2);ctx.stroke();ctx.strokeStyle='rgba(139,114,48,0.5)';ctx.lineWidth=2;ctx.beginPath();ctx.arc(cx,cy,420,0,Math.PI*2);ctx.stroke();for(let i=0;i<36;i++){const a=(i/36)*Math.PI*2;ctx.strokeStyle='#E8D48B';ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(cx+Math.cos(a)*460,cy+Math.sin(a)*460);ctx.lineTo(cx+Math.cos(a)*490,cy+Math.sin(a)*490);ctx.stroke()}ctx.fillStyle='#5A3E1A';ctx.font='600 32px sans-serif';ctx.textAlign='center';ctx.save();ctx.translate(cx,cy);const topText='NATIONAL MEDICAL PRODUCTS ADMINISTRATION';for(let i=0;i<topText.length;i++){const ca=-Math.PI/2+(i-topText.length/2+0.5)*0.055;ctx.save();ctx.rotate(ca);ctx.translate(0,-360);ctx.rotate(Math.PI/2);ctx.fillText(topText[i],0,0);ctx.restore()}ctx.restore();ctx.font='900 96px serif';ctx.fillText('NMPA',cx,cy-40);ctx.font='700 42px serif';ctx.fillText('三类医疗器械',cx,cy+40);ctx.strokeStyle='#5A3E1A';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(cx-120,cy+65);ctx.lineTo(cx+120,cy+65);ctx.stroke();ctx.font='500 30px sans-serif';ctx.fillText('CLASS III',cx,cy+110);ctx.font='600 28px sans-serif';ctx.save();ctx.translate(cx,cy);const bText='国家药品监督管理局认证';for(let i=0;i<bText.length;i++){const ca=Math.PI/2+(i-bText.length/2+0.5)*0.07;ctx.save();ctx.rotate(ca);ctx.translate(0,360);ctx.rotate(-Math.PI/2);ctx.fillText(bText[i],0,0);ctx.restore()}ctx.restore();function drawStar(x,y,r){ctx.fillStyle='#5A3E1A';ctx.beginPath();for(let i=0;i<5;i++){const a=(i*4*Math.PI)/5-Math.PI/2;const px=x+Math.cos(a)*r;const py=y+Math.sin(a)*r;if(i===0)ctx.moveTo(px,py);else ctx.lineTo(px,py)}ctx.closePath();ctx.fill()}drawStar(cx-180,cy+20,12);drawStar(cx+180,cy+20,12);return new THREE.CanvasTexture(c)}
+
+function createBadgeBackTex(){const c=document.createElement('canvas');c.width=1024;c.height=1024;const ctx=c.getContext('2d');const g=ctx.createRadialGradient(512,512,100,512,512,500);g.addColorStop(0,'#D4B868');g.addColorStop(1,'#A08030');ctx.fillStyle=g;ctx.beginPath();ctx.arc(512,512,490,0,Math.PI*2);ctx.fill();for(let r=80;r<450;r+=40){ctx.strokeStyle=`rgba(90,62,26,${0.1+(r/450)*0.1})`;ctx.lineWidth=1;ctx.beginPath();ctx.arc(512,512,r,0,Math.PI*2);ctx.stroke()}ctx.fillStyle='#5A3E1A';ctx.font='600 36px serif';ctx.textAlign='center';ctx.fillText('品质保障',512,500);ctx.font='300 24px sans-serif';ctx.fillText('QUALITY ASSURED',512,540);return new THREE.CanvasTexture(c)}
+
+const badgeGroup=new THREE.Group();const badgeGeo=new THREE.CylinderGeometry(2,2,0.25,64);const badgeMats=[new THREE.MeshStandardMaterial({roughness:0.15,metalness:0.9,color:0xC9A84C}),new THREE.MeshStandardMaterial({map:createBadgeTex(),roughness:0.1,metalness:0.6}),new THREE.MeshStandardMaterial({map:createBadgeBackTex(),roughness:0.1,metalness:0.6})];const badge=new THREE.Mesh(badgeGeo,badgeMats);badge.rotation.x=Math.PI/2;badgeGroup.add(badge);badgeGroup.add(new THREE.Mesh(new THREE.TorusGeometry(2,0.06,16,64),new THREE.MeshStandardMaterial({color:0xE8D48B,roughness:0.1,metalness:0.95})));badgeGroup.children[1].rotation.x=Math.PI/2;scene.add(badgeGroup);const glowR=new THREE.Mesh(new THREE.TorusGeometry(2.4,0.08,16,64),new THREE.MeshBasicMaterial({color:COLORS3D.red,transparent:true,opacity:0.4,blending:THREE.AdditiveBlending}));glowR.rotation.x=Math.PI/2;badgeGroup.add(glowR);const glowR2=new THREE.Mesh(new THREE.TorusGeometry(2.7,0.04,16,64),new THREE.MeshBasicMaterial({color:COLORS3D.red,transparent:true,opacity:0.2,blending:THREE.AdditiveBlending}));glowR2.rotation.x=Math.PI/2;badgeGroup.add(glowR2);const badgeP=createParticleField3D(200,8,COLORS3D.gold,0.02);scene.add(badgeP);const spCount=200;const spGeo=new THREE.BufferGeometry();const spPos=new Float32Array(spCount*3);const spVels=[];for(let i=0;i<spCount;i++){spPos[i*3]=0;spPos[i*3+1]=0;spPos[i*3+2]=0;const th=Math.random()*Math.PI*2;const ph=Math.random()*Math.PI;const spd=0.05+Math.random()*0.15;spVels.push({x:Math.sin(ph)*Math.cos(th)*spd,y:Math.sin(ph)*Math.sin(th)*spd,z:Math.cos(ph)*spd})}spGeo.setAttribute('position',new THREE.BufferAttribute(spPos,3));const spMat=new THREE.PointsMaterial({color:COLORS3D.red,size:0.06,transparent:true,opacity:0,blending:THREE.AdditiveBlending,depthWrite:false});const stampP=new THREE.Points(spGeo,spMat);scene.add(stampP);let stampProg=0,stampActive=false,stampT=0,badgeBY=0;const stampText=document.getElementById('stamp-text-3d');renderer.domElement.addEventListener('click',()=>{if(!stampActive){stampActive=true;stampProg=0;stampT=0;const pos=spGeo.attributes.position.array;for(let i=0;i<spCount;i++){pos[i*3]=0;pos[i*3+1]=0;pos[i*3+2]=0}spGeo.attributes.position.needsUpdate=true;spMat.opacity=1}});renderer.domElement.style.cursor='pointer';let t4=0;function animate4(){requestAnimationFrame(animate4);t4+=0.016;badgeGroup.rotation.y+=0.005;badgeGroup.position.y=Math.sin(t4*0.6)*0.2+badgeBY;glowR.material.opacity=0.3+Math.sin(t4*1.5)*0.15;glowR2.material.opacity=0.15+Math.cos(t4*1.2)*0.1;glowR2.rotation.z=t4*0.1;badgeP.rotation.y+=0.0005;badgeP.rotation.x=Math.sin(t4*0.3)*0.05;if(stampActive){stampProg+=0.02;if(stampProg<0.5){const ep=easeInOutCubic3d(stampProg/0.5);badgeBY=-ep*0.8;badgeGroup.scale.setScalar(1+ep*0.1)}else if(stampProg<0.6){badgeBY=-0.8}else if(stampProg<1.0){const ep=(stampProg-0.6)/0.4;badgeBY=lerp3d(-0.8,0,easeInOutCubic3d(ep));badgeGroup.scale.setScalar(1.1-ep*0.1)}else{badgeBY=0;badgeGroup.scale.setScalar(1)}if(stampProg>0.4&&stampProg<1.5){const bt=stampProg-0.4;const pos=spGeo.attributes.position.array;for(let i=0;i<spCount;i++){pos[i*3]+=spVels[i].x;pos[i*3+1]+=spVels[i].y;pos[i*3+2]+=spVels[i].z;spVels[i].x*=0.97;spVels[i].y*=0.97;spVels[i].z*=0.97}spGeo.attributes.position.needsUpdate=true;spMat.opacity=Math.max(0,1-bt/1.1)}if(stampProg>0.5&&stampProg<1.5)stampText.classList.add('visible');else stampText.classList.remove('visible');if(stampProg>2){stampActive=false;stampText.classList.remove('visible')}}renderer.render(scene,camera)}animate4();window.addEventListener('resize',()=>{camera.aspect=container.clientWidth/container.clientHeight;camera.updateProjectionMatrix();renderer.setSize(container.clientWidth,container.clientHeight)})})();
+
+/* 3D Nav Active State */
+(function(){const navLinks=document.querySelectorAll('.nav-3d a');const sections=document.querySelectorAll('.sec-3d');function update(){let cur='';sections.forEach(s=>{const r=s.getBoundingClientRect();if(r.top<=window.innerHeight*0.5&&r.bottom>=window.innerHeight*0.3)cur=s.id});navLinks.forEach(l=>l.classList.toggle('active',l.getAttribute('href')==='#'+cur))}window.addEventListener('scroll',update,{passive:true});update()})();
+</script>
+<!-- ===== END 3D MODULE SCRIPT ===== -->
 </body>
 </html>
